@@ -27,6 +27,7 @@ if os.getenv('ENV') == 'development':
       'ENGINE': 'django.db.backends.postgresql',
       'NAME': DB_NAME,
   }
+  print ('development')
   # Set debug to true
   DEBUG = True
   # Only allow locally running client at port 7165 for CORS
@@ -41,7 +42,7 @@ else:
   CORS_ORIGIN_WHITELIST = [
     os.getenv('CLIENT_ORIGIN')
   ]
-
+  print ('production')
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 # Default database as defined above depending on development
@@ -81,6 +82,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -88,7 +90,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'menu.urls'
