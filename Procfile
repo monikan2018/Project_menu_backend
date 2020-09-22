@@ -1,2 +1,2 @@
-web: gunicorn family_menu.wsgi
+web: gunicorn menu.wsgi
 release: python manage.py migrate
